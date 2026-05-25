@@ -1,0 +1,975 @@
+/* =========================================================
+   Bridging the A-I-R — stylesheet
+   Minimalistic, editorial, inspired by the BtAIR visual
+   identity (wave motif, yellow + blue accents, generous
+   white space, serif display + clean sans body).
+   ========================================================= */
+
+
+/* ---------- 1. Design tokens ---------- */
+
+:root {
+    /* Colors — mostly off-white & ink, with one yellow and one blue accent */
+    --color-bg:         #f7f5f0;   /* soft warm off-white */
+    --color-bg-alt:     #efece4;   /* slightly deeper for alternating sections */
+    --color-ink:        #14181f;   /* near-black for text */
+    --color-ink-soft:   #4a5260;   /* secondary text */
+    --color-line:       #d8d3c5;   /* hairlines, borders */
+    --color-yellow:     #f6c63a;   /* accent — from BtAIR visual identity */
+    --color-blue:       #3b56b8;   /* accent — from BtAIR visual identity */
+    --color-blue-dark:  #1f2a6b;
+
+    /* Type */
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body:    'Inter Tight', system-ui, -apple-system, sans-serif;
+
+    /* Spacing scale */
+    --space-1: 0.5rem;
+    --space-2: 1rem;
+    --space-3: 1.5rem;
+    --space-4: 2rem;
+    --space-5: 3rem;
+    --space-6: 5rem;
+    --space-7: 8rem;
+
+    /* Layout */
+    --container-max: 1180px;
+    --radius:        4px;
+}
+
+
+/* ---------- 2. Reset & base ---------- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-ink);
+    background-color: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--color-blue-dark);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--color-blue);
+}
+
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+}
+
+
+/* ---------- 3. EU strip (top) ---------- */
+
+.eu-strip {
+    background-color: var(--color-ink);
+    color: #fff;
+    padding: var(--space-1) 0;
+    font-size: 0.82rem;
+}
+
+.eu-strip__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+.eu-strip__logo {
+    height: 26px;
+    background-color: #fff;
+    padding: 4px 6px;
+    border-radius: 2px;
+}
+
+.eu-strip__text {
+    margin: 0;
+    opacity: 0.85;
+}
+
+
+/* ---------- 4. Header & navigation ---------- */
+
+.sticky-stack {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.site-header {
+    background-color: rgba(247, 245, 240, 0.92);
+    border-bottom: 1px solid var(--color-line);
+    backdrop-filter: blur(6px);
+}
+
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-3);
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+/* ---------- 3b. Timeline bar ---------- */
+
+.timeline-bar {
+    background-color: rgba(247, 245, 240, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--color-line);
+}
+
+.timeline-bar__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+}
+
+.timeline-bar__label {
+    font-size: 0.72rem;
+    color: var(--color-ink-soft);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+}
+
+.timeline-bar__label--end {
+    text-align: right;
+}
+
+.timeline-bar__track {
+    flex: 1;
+    position: relative;
+    height: 6px;
+    background-color: var(--color-line);
+    border-radius: 3px;
+}
+
+.timeline-bar__fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0%;
+    background-color: var(--color-yellow);
+    border-radius: 3px;
+    transition: width 0.6s ease;
+}
+
+.timeline-bar__mark {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 14px;
+    background-color: var(--color-ink-soft);
+    opacity: 0.35;
+}
+
+.timeline-bar__mark-label {
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.62rem;
+    color: var(--color-ink-soft);
+    opacity: 0.7;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.timeline-bar__now {
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-yellow);
+    border: 2px solid var(--color-ink);
+    transform: translate(-50%, -50%);
+}
+
+.timeline-bar__status {
+    font-size: 0.72rem;
+    color: var(--color-ink-soft);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ---------- 3c. Brand mark ---------- */
+
+.brand-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+}
+
+.brand-mark__wave {
+    width: 50px;
+    height: 14px;
+    color: var(--color-blue);
+}
+
+.site-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+.site-nav a {
+    font-size: 0.92rem;
+    color: var(--color-ink);
+    font-weight: 500;
+    position: relative;
+    padding: 4px 0;
+}
+
+.site-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-blue);
+    transition: width 0.25s ease;
+}
+
+.site-nav a:hover::after {
+    width: 100%;
+}
+
+
+/* ---------- 5. Sections — common ---------- */
+
+.section {
+    padding: var(--space-7) 0;
+    position: relative;
+}
+
+.section--alt {
+    background-color: var(--color-bg-alt);
+}
+
+.section--hero {
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-7);
+}
+
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-3) 0;
+}
+
+.section__title,
+.hero__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--space-4) 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.section__title {
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    margin-bottom: var(--space-3);
+}
+
+.section__lead,
+.hero__lead {
+    font-size: 1.12rem;
+    line-height: 1.7;
+    max-width: 65ch;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-5) 0;
+}
+
+.hero__lead {
+    font-size: 1.22rem;
+    color: var(--color-ink);
+}
+
+.hero__wave,
+.section__wave {
+    color: var(--color-blue);
+}
+
+.hero__wave {
+    width: clamp(150px, 28vw, 320px);
+    height: clamp(40px, 7vw, 80px);
+}
+
+.section__wave {
+    width: clamp(100px, 18vw, 180px);
+    height: clamp(28px, 5vw, 50px);
+}
+
+.subhead {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin: var(--space-5) 0 var(--space-3);
+    color: var(--color-ink);
+}
+
+
+/* ---------- 6. Hero / Welcome cards ---------- */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: var(--space-2);
+    margin-top: var(--space-5);
+}
+
+.card {
+    padding: var(--space-3);
+    background-color: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    color: var(--color-ink);
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-blue);
+    box-shadow: 0 12px 30px -18px rgba(20, 24, 31, 0.25);
+}
+
+.card__letter {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--color-yellow);
+    line-height: 1;
+    display: block;
+    margin-bottom: var(--space-2);
+}
+
+.card__title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 0.3rem 0;
+}
+
+.card__desc {
+    margin: 0;
+    color: var(--color-ink-soft);
+    font-size: 0.9rem;
+}
+
+
+/* ---------- 7. Signpost (3 national platforms) ---------- */
+
+.signpost-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-2);
+}
+
+.signpost-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    background-color: var(--color-ink);
+    color: #fff;
+    border-radius: var(--radius);
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.signpost-card:hover {
+    background-color: var(--color-blue-dark);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.signpost-card__flag {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.4rem;
+    background-color: var(--color-yellow);
+    color: var(--color-ink);
+    padding: 6px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+}
+
+.signpost-card__url {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1.05rem;
+    flex: 1;
+}
+
+.signpost-card__arrow {
+    font-size: 1.4rem;
+    transition: transform 0.25s ease;
+}
+
+.signpost-card:hover .signpost-card__arrow {
+    transform: translateX(4px);
+}
+
+
+/* ---------- 8. Tabs (Residencies section) ---------- */
+
+.tabs {
+    display: flex;
+    gap: var(--space-1);
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--color-line);
+    margin-bottom: var(--space-4);
+}
+
+.tab {
+    background: none;
+    border: none;
+    padding: var(--space-2) var(--space-3);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-ink-soft);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tab:hover {
+    color: var(--color-ink);
+}
+
+.tab--active {
+    color: var(--color-ink);
+    border-bottom-color: var(--color-blue);
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel--active {
+    display: block;
+    animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ---------- 9. Single PDF/document link card ---------- */
+
+.doc-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    background-color: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    color: var(--color-ink);
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.doc-link:hover {
+    border-color: var(--color-blue);
+    transform: translateY(-2px);
+}
+
+.doc-link__icon {
+    background-color: var(--color-yellow);
+    color: var(--color-ink);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    padding: 6px 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.doc-link__title {
+    flex: 1;
+    font-weight: 500;
+}
+
+.doc-link__action {
+    color: var(--color-blue-dark);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+
+/* ---------- 10. Residency programme cards ---------- */
+
+.residency-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-3);
+}
+
+.residency-card {
+    background-color: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.residency-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px -18px rgba(20, 24, 31, 0.25);
+}
+
+.residency-card__image {
+    height: 160px;
+    background:
+        linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-dark) 100%);
+    position: relative;
+}
+
+.residency-card__image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 30% 60%, rgba(246, 198, 58, 0.35) 0%, transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.18) 0%, transparent 50%);
+}
+
+.residency-card__body {
+    padding: var(--space-3);
+}
+
+.residency-card__date {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-blue-dark);
+    font-weight: 600;
+    margin: 0 0 var(--space-1) 0;
+}
+
+.residency-card__title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 var(--space-1) 0;
+}
+
+.residency-card__place,
+.residency-card__artist,
+.residency-card__events {
+    margin: 0 0 0.4rem 0;
+    color: var(--color-ink-soft);
+    font-size: 0.93rem;
+}
+
+
+/* ---------- 11. Report cards ---------- */
+
+.report-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-3);
+}
+
+.report-card {
+    background-color: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+    transition: border-color 0.25s ease;
+}
+
+.report-card:hover {
+    border-color: var(--color-blue);
+}
+
+.report-card__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-yellow);
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-2);
+}
+
+.report-card__title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 var(--space-1) 0;
+}
+
+.report-card__excerpt {
+    color: var(--color-ink-soft);
+    font-size: 0.93rem;
+    margin: 0 0 var(--space-2) 0;
+}
+
+.report-card__link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-blue-dark);
+}
+
+
+/* ---------- 12. Document list (research / manuals) ---------- */
+
+.docs-list {
+    display: grid;
+    gap: var(--space-2);
+}
+
+.doc-item {
+    padding: var(--space-3);
+    background-color: #fff;
+    border: 1px solid var(--color-line);
+    border-left: 4px solid var(--color-yellow);
+    border-radius: var(--radius);
+    transition: border-left-color 0.25s ease, transform 0.2s ease;
+}
+
+.doc-item:hover {
+    border-left-color: var(--color-blue);
+    transform: translateX(3px);
+}
+
+.doc-item__title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 var(--space-1) 0;
+}
+
+.doc-item__desc {
+    margin: 0 0 var(--space-2) 0;
+    color: var(--color-ink-soft);
+    max-width: 70ch;
+}
+
+.doc-item__link {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--color-blue-dark);
+}
+
+
+/* ---------- 13. Events cards ---------- */
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-3);
+}
+
+.event-card {
+    background-color: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px -18px rgba(20, 24, 31, 0.25);
+}
+
+.event-card__media {
+    height: 130px;
+    background:
+        linear-gradient(135deg, var(--color-yellow) 0%, #e8b220 100%);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-2);
+}
+
+.event-card__media--alt {
+    background:
+        linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-dark) 100%);
+}
+
+.event-card__date-badge {
+    background-color: var(--color-ink);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 2px;
+}
+
+.event-card__body {
+    padding: var(--space-3);
+}
+
+.event-card__meta {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-blue-dark);
+    font-weight: 600;
+    margin: 0 0 var(--space-1) 0;
+}
+
+.event-card__title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 0.3rem 0;
+}
+
+.event-card__org {
+    font-size: 0.88rem;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-2) 0;
+    font-style: italic;
+}
+
+.event-card__text {
+    font-size: 0.93rem;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-2) 0;
+}
+
+.event-card__link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-blue-dark);
+}
+
+
+/* ---------- 14. Partners grid ---------- */
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+}
+
+.partner-card {
+    background-color: #fff;
+    padding: var(--space-3);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.partner-card:hover {
+    border-color: var(--color-blue);
+    transform: translateY(-2px);
+}
+
+.partner-card--lead {
+    border-top: 4px solid var(--color-yellow);
+}
+
+.partner-card__role {
+    display: inline-block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    background-color: var(--color-bg-alt);
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-bottom: var(--space-2);
+}
+
+.partner-card--lead .partner-card__role {
+    background-color: var(--color-yellow);
+    color: var(--color-ink);
+}
+
+.partner-card__name {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin: 0 0 0.2rem 0;
+}
+
+.partner-card__location {
+    font-size: 0.88rem;
+    color: var(--color-ink-soft);
+    margin: 0 0 var(--space-2) 0;
+    font-style: italic;
+}
+
+.partner-card__desc {
+    margin: 0 0 var(--space-2) 0;
+    font-size: 0.95rem;
+    color: var(--color-ink-soft);
+}
+
+.partner-card__link {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--color-blue-dark);
+}
+
+
+/* ---------- 15. Contact box ---------- */
+
+.contact-box {
+    background-color: var(--color-ink);
+    color: #fff;
+    padding: var(--space-4);
+    border-radius: var(--radius);
+}
+
+.contact-box__title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 var(--space-2) 0;
+    color: var(--color-yellow);
+}
+
+.contact-box p {
+    margin: 0;
+    line-height: 1.8;
+}
+
+.contact-box a {
+    color: #fff;
+    border-bottom: 1px solid var(--color-yellow);
+}
+
+.contact-box a:hover {
+    color: var(--color-yellow);
+}
+
+
+/* ---------- 16. Footer ---------- */
+
+.site-footer {
+    background-color: var(--color-ink);
+    color: #cfd2d8;
+    padding: var(--space-5) 0 var(--space-3);
+    margin-top: 0;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    margin-bottom: var(--space-3);
+}
+
+.footer-logos__item img {
+    height: 50px;
+    background-color: #fff;
+    padding: 8px 12px;
+    border-radius: 2px;
+}
+
+.footer-disclaimer {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    max-width: 80ch;
+    color: #aab0bb;
+    margin: 0 0 var(--space-2) 0;
+}
+
+.footer-coord {
+    font-size: 0.88rem;
+    color: #cfd2d8;
+    margin: 0 0 var(--space-3) 0;
+}
+
+.footer-coord strong {
+    color: #fff;
+}
+
+.footer-meta {
+    font-size: 0.78rem;
+    color: #7d8290;
+    margin: 0;
+    padding-top: var(--space-2);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+/* ---------- 17. Responsive tweaks ---------- */
+
+@media (max-width: 720px) {
+    .site-header__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-2);
+    }
+
+    .site-nav ul {
+        gap: var(--space-2);
+    }
+
+    .section {
+        padding: var(--space-6) 0;
+    }
+
+    .eu-strip__inner {
+        font-size: 0.75rem;
+    }
+}
