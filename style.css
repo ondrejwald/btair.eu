@@ -137,11 +137,11 @@ em     { font-style: italic; }
    ---------------------------------------------------------- */
 
 .bg-frame {
-    position: fixed;
+    position: absolute;
     inset: 0;
     z-index: -1;
     background-image: url("assets/bg/bg-decorative.png");
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
     background-position: center top;
     background-size: 100% auto;
     pointer-events: none;
@@ -178,6 +178,10 @@ em     { font-style: italic; }
 .brand__logo {
     height: 32px;
     width: auto;
+ transition: opacity var(--dur) var(--ease);
+}
+.brand:hover .brand__logo {
+    opacity: 0.7;
 }
 
 .nav {
@@ -221,6 +225,7 @@ em     { font-style: italic; }
     max-width: var(--container);
     margin: 0 auto;
     padding: 0 var(--gutter);
+    background: var(--c-white);
 }
 
 .section {
@@ -230,20 +235,6 @@ em     { font-style: italic; }
 
 .section + .section {
     border-top: 1px solid var(--c-grey-light);
-}
-
-/* Brand mark on yellow — the "Bridging ∿ the A-I-R" strip */
-.brandmark {
-    display: inline-block;
-    background: var(--c-yellow);
-    padding: 14px 28px;
-    margin-bottom: 40px;
-    border-radius: 2px;
-}
-
-.brandmark img {
-    height: 28px;
-    width: auto;
 }
 
 .section__meta {
@@ -542,6 +533,15 @@ em     { font-style: italic; }
 .doc-row:hover {
     background: var(--c-orange);
     transform: var(--lift);
+}
+
+/* Grey variant — used for Reports (tab 3), to stay visually distinct
+   from the yellow downloadable-file rows used elsewhere */
+.doc-row--grey {
+    background: var(--c-grey-bg);
+}
+.doc-row--grey:hover {
+    background: var(--c-orange);
 }
 
 
